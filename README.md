@@ -15,7 +15,12 @@ There will be style requirements for the job:
 2. Clean CSS for easy style changes in the future
 3. Branding elements with CSS only
 
+Basically rich text in _input_ and _output_ panes. Snippets like _Google Search_ snippets in the _search_ pane. Clicking _search_ inserts the snippet into _output_
+Writing new paragraph in _input_ changes _search_
+
 *PureScript* programmers particularly *welcome*.
+
+
 # Running the project
 
 Running the project is as simple as running
