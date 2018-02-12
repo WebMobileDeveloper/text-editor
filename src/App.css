@@ -1,0 +1,65 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+
+/* css from template */
+#page {
+  display: grid;
+  height: 100%;
+  grid-template-areas: "header header header"
+                       "left   center right"
+                       "footer footer footer";
+  /*grid-template-rows: min-content 1fr min-content;*/
+  grid-template-rows: min-content auto min-content;
+  /*grid-template-columns: 33% 33% 33%;*/
+}
+#page > .header {
+  grid-area: "header";
+  background-color: #8ca0ff;
+}
+#page > .description {
+  grid-area: left;
+  display: flex;
+  background-color: #ffa08c;
+}
+#page > .summary {
+  grid-area: center;
+  display: flex;
+  background-color: #8cffa0;
+}
+#page > .search {
+  grid-area: right;
+  display: flex;
+  background-color: #ffff64;
+}
+#page > .footer {
+  grid-area: footer;
+  background-color: #f0f0f0;
+}

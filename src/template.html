@@ -1,0 +1,59 @@
+<head>
+    <title>Corrector</title>
+    <link rel="stylesheet" type="text/css" href="style/font.css">
+    <style>
+      #page {
+        display: grid;
+        height: 100%;
+        grid-template-areas: "header header header"
+                             "left   center right"
+                             "footer footer footer";
+        /*grid-template-rows: min-content 1fr min-content;*/
+        grid-template-rows: min-content auto min-content;
+        /*grid-template-columns: 33% 33% 33%;*/
+      }
+      #page > .header {
+        grid-area: "header";
+        background-color: #8ca0ff;
+      }
+      #page > .description {
+        grid-area: left;
+        display: flex;
+        background-color: #ffa08c;
+      }
+      #page > .summary {
+        grid-area: center;
+        display: flex;
+        background-color: #8cffa0;
+      }
+      #page > .search {
+        grid-area: right;
+        display: flex;
+        background-color: #ffff64;
+      }
+      #page > .footer {
+        grid-area: footer;
+        background-color: #f0f0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="page">
+      <div class="header">
+        Corrector
+      </div>
+      <div class="description">
+        Input
+      </div>
+      <div class="summary">
+        Output
+      </div>
+      <div class="search">
+        Search results
+      </div>
+      <div class="footer">
+        Copyright '2018 Migamake
+      </div>
+    </div>
+  </body>
+</html>
