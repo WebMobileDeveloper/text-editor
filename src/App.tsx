@@ -11,8 +11,6 @@ class App extends React.Component {
         </div>          
         <div className="description" >
           <Description contents={''}/> 
-          {/* <div className="react-wysiwyg-typescript-toolbar">toolbar</div>
-          <div className="react-wysiwyg-typescript-editor">content</div> */}
         </div>     
         <div className="summary">
           Output
