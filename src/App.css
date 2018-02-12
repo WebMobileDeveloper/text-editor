@@ -47,10 +47,19 @@ html, body {
   display: flex;
   background-color: #f0f0f0;
 }
-.react-wysiwyg-typescript-toolbar{
-  flex: none;
+.react-wysiwyg-typescript-toolbar{  
+  visibility: hidden !important;
+  height: 0;
   margin-bottom:0px !important;
+  padding: 0px !important;
+  border: none !important;
 }
 .react-wysiwyg-typescript-editor{
   background-color: beige;
+  /* padding: 0px !important; */
+  border: none !important;
+}
+.public-DraftStyleDefault-block{
+  margin-top: 0 !important;
+  margin-bottom: 0.5em !important;
 }
