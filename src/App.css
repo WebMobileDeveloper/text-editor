@@ -1,53 +1,36 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-
-
 /* css from template */
+html, body {
+  height: 100%;
+  margin: 0;
+  min-height: 100%;
+  padding: 0;
+}
 #page {
   display: grid;
   height: 100%;
+  min-height: 100%;
   grid-template-areas: "header header header"
                        "left   center right"
                        "footer footer footer";
-  /*grid-template-rows: min-content 1fr min-content;*/
   grid-template-rows: min-content auto min-content;
-  /*grid-template-columns: 33% 33% 33%;*/
+  grid-template-columns: 33% 33% 34%;
 }
 #page > .header {
-  grid-area: "header";
+  grid-area: header;
+  display: flex;
   background-color: #8ca0ff;
 }
 #page > .description {
   grid-area: left;
   display: flex;
   background-color: #ffa08c;
+  position: relative;
+}
+#page > .description > .rdw-editor-wrapper{
+  position: absolute;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 #page > .summary {
   grid-area: center;
@@ -61,5 +44,13 @@
 }
 #page > .footer {
   grid-area: footer;
+  display: flex;
   background-color: #f0f0f0;
+}
+.react-wysiwyg-typescript-toolbar{
+  flex: none;
+  margin-bottom:0px !important;
+}
+.react-wysiwyg-typescript-editor{
+  background-color: beige;
 }

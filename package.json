@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "cl-editor": "^1.3.0",
-    "react": "^16.2.0",
+    "jquery": "^3.3.1",
     "react-dom": "^16.2.0",
-    "react-scripts-ts": "2.13.0"
+    "react-scripts-ts": "2.13.0",
+    "react-text-edit": "^0.2.3",
+    "react-wysiwyg-typescript": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -19,6 +21,9 @@
     "@types/node": "^9.4.5",
     "@types/react": "^16.0.36",
     "@types/react-dom": "^16.0.3",
+    "classnames": "^2.2.5",
+    "react": "^16.2.0",
+    "react-texteditor": "^0.1.1",
     "typescript": "^2.7.1"
   }
 }
