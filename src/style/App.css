@@ -1,0 +1,119 @@
+body {
+  font-family: 'CooperHewitt-Medium'; 
+}
+
+/* css from template */
+html, body {
+  height: 100%;
+  margin: 0;
+  min-height: 100%;
+  padding: 0;
+  background-color: #EEEEEE;
+}
+#page {
+  display: grid;
+  height: 100%;
+  min-height: 100%;
+  grid-template-areas: "header header header"
+                       "left   center right"
+                       "footer footer footer";
+  grid-template-rows: min-content auto min-content;
+  grid-template-columns: 33% 33% 34%;
+}
+#page > .header, #page > .footer{
+  padding: 1ex 3ex;  
+}
+#page > .header {
+  grid-area: header;
+  display: flex;
+  background-color: #31436b;
+  font-family: 'charter_regular' !important;
+  color:white;
+}
+#page > .footer {
+  grid-area: footer;
+  background-color: #31436b;
+  text-align: right;
+  font-style: italic;
+  font-family: 'charter_regular' !important;
+  color:white;
+}
+#page > .description {
+  grid-area: left;
+  display: flex;
+  position: relative;  
+}
+#page > .search {
+  grid-area: center;
+  display: flex;
+  background-color: #F2EEED;
+  position: relative;
+  overflow: auto;
+  overflow-x: hidden;
+}
+#page > .summary {
+  grid-area: right;
+  display: flex;
+  position: relative;
+  background-color: white;
+  padding: 0px 20px;
+}
+
+
+
+
+/*========= editor style ================*/
+
+#page .rdw-editor-wrapper{
+  position: absolute;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-right: 5px;
+}
+ul{
+  -webkit-padding-start: 20px;
+}
+.react-wysiwyg-typescript-toolbar{  
+  visibility: hidden !important;
+  height: 0;
+  margin-bottom:0px !important;
+  padding: 0px !important;
+  border: none !important;
+}
+.react-wysiwyg-typescript-editor{
+  border: none !important;
+}
+.description .react-wysiwyg-typescript-editor{
+  background-color: white;
+}
+.summary .react-wysiwyg-typescript-editor{
+  background-color: white;
+}
+.public-DraftStyleDefault-block{
+  margin-top: 0 !important;
+  margin-bottom: 0.5em !important;  
+}
+.public-DraftEditor-content{
+  width: 100%;
+  position: absolute;
+}
+/* ============== search List style */
+.search ul{
+  list-style: none;
+  -webkit-margin-before: 0px;
+}
+.search-result>div{
+  padding: 5px;
+  float:left;
+}
+.search-list-score{
+  padding-right: 20px;
+}
+.search-list-title{
+  color: #0c1d9c;
+}
+.search-list-title:hover{
+  color: red;
+  text-decoration-line: underline;
+}
