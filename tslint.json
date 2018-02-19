@@ -22,7 +22,7 @@
         "jsx-no-lambda": false,
         "jsx-no-multiline-js": false,
         "label-position": true,
-        "max-line-length": [ true, 120 ],
+        "max-line-length": [ true, 250 ],
         "member-ordering": [
             true,
             "public-before-private",
@@ -35,7 +35,7 @@
         "no-bitwise": true,
         "no-console": [
             true,
-            "log",
+            // "log",
             "error",
             "debug",
             "info",

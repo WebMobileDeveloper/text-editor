@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/react-redux": "^5.0.15",
     "jquery": "^3.3.1",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-redux-typescript": "^3.0.0-rc.3",
     "react-scripts-ts": "2.13.0",
-    "react-wysiwyg-typescript": "^1.0.1"
+    "react-wysiwyg-typescript": "^1.0.1",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",

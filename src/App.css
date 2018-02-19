@@ -4,6 +4,7 @@ html, body {
   margin: 0;
   min-height: 100%;
   padding: 0;
+  background-color: #EEEEEE;
 }
 #page {
   display: grid;
@@ -23,29 +24,33 @@ html, body {
 #page > .description {
   grid-area: left;
   display: flex;
-  background-color: #ffa08c;
   position: relative;
-}
-#page > .description > .rdw-editor-wrapper{
-  position: absolute;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 #page > .summary {
   grid-area: center;
   display: flex;
-  background-color: #8cffa0;
+  position: relative;
 }
 #page > .search {
   grid-area: right;
   display: flex;
-  background-color: #ffff64;
+  background-color: #FDF6E3;
 }
 #page > .footer {
   grid-area: footer;
   display: flex;
   background-color: #f0f0f0;
+}
+
+
+/*========= editor style ================*/
+
+#page .rdw-editor-wrapper{
+  position: absolute;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-right: 5px;
 }
 .react-wysiwyg-typescript-toolbar{  
   visibility: hidden !important;
@@ -55,11 +60,24 @@ html, body {
   border: none !important;
 }
 .react-wysiwyg-typescript-editor{
-  background-color: beige;
-  /* padding: 0px !important; */
   border: none !important;
+}
+.description .react-wysiwyg-typescript-editor{
+  background-color: white;
+}
+.summary .react-wysiwyg-typescript-editor{
+  background-color: white;
 }
 .public-DraftStyleDefault-block{
   margin-top: 0 !important;
   margin-bottom: 0.5em !important;
+}
+
+/* ============== search List style */
+
+.search ul{
+  list-style: none;
+}
+.search-list-span{
+  background-color: aquamarine;
 }

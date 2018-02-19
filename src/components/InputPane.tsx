@@ -4,8 +4,14 @@ import Draft, { htmlToDraft } from 'react-wysiwyg-typescript';
 import { EditorState } from 'draft-js';
 
 
+interface Props {
+    contents: string;
+}
+interface State {
+    editorState: EditorState;
+}
 
-class Description extends React.Component<Props, State> {
+class InputPane extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -21,11 +27,4 @@ class Description extends React.Component<Props, State> {
         );
     }
 }
-export default Description;
-
-interface Props {
-    contents: string;
-}
-interface State {
-    editorState: EditorState;
-}
+export default InputPane;
