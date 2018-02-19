@@ -105,11 +105,17 @@ ul{
 #page > .search li{
   margin-bottom: 20px;
 }
-.search-list-span{
+.search-result>div{
   padding: 5px;
+  float:left;
+}
+.search-list-score{
+  padding-right: 20px;
+}
+.search-list-title{
   color: #0c1d9c;
 }
-.search-list-span:hover{
+.search-list-title:hover{
   color: red;
   text-decoration-line: underline;
 }

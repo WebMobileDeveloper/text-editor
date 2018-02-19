@@ -6,11 +6,10 @@ import { ResponseType } from '../types';
 
 interface Props {
 }
-
 interface State {
   outputString: string;
   appendString: string;
-  searchResults: Array<string>;
+  searchResults: Array<ResponseType>;
 }
 class App extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -34,7 +33,7 @@ class App extends React.Component<Props, State> {
       // searchResults: (tostring === '') ? [] : fullResults.filter(function (item: string, i: number) {
       //   return item.toLowerCase().includes(tostring.toLowerCase());
       // })
-      searchResults: (data.toString === '') ? [] : [data.toString, data.toRef, data.toInsert]
+      searchResults: (data.toString === '') ? [] : [data],
     });
     return;
   }
@@ -52,7 +51,7 @@ class App extends React.Component<Props, State> {
           <div>
             <ul>
               {
-                this.state.searchResults.map((item: string, i: number) => {
+                this.state.searchResults.map((item: ResponseType, i: number) => {
                   return <SearchList key={i} value={item} onListClicked={this.listClicked} />;
                 })
               }
