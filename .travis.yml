@@ -1,2 +1,9 @@
+before_install:
+   # install v8.x of nodejs
+   - nvm install 8
+  #install yarn globally
+   - npm install -g yarn
+  # yarn install is like npm install
+   - yarn install
 cache: yarn
 language: node_js
