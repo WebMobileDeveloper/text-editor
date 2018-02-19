@@ -55,6 +55,11 @@ class App extends React.Component<Props, State> {
                   return <SearchList key={i} value={item} onListClicked={this.listClicked} />;
                 })
               }
+              {
+                this.state.searchResults.map((item: ResponseType, i: number) => {
+                  return <SearchList key={i} value={item} onListClicked={this.listClicked} />;
+                })
+              }
             </ul>
           </div>
         </div>

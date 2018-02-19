@@ -101,9 +101,7 @@ ul{
 /* ============== search List style */
 .search ul{
   list-style: none;
-}
-#page > .search li{
-  margin-bottom: 20px;
+  -webkit-margin-before: 0px;
 }
 .search-result>div{
   padding: 5px;

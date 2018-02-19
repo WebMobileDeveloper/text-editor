@@ -22,23 +22,30 @@ class InputPane extends React.Component<Props, State> {
     onContentStateChange = (editorState: EditorState) => {
         const raw = draftToRaw(editorState);
         const obj = JSON.parse(raw).blocks;
-        const lastLineArray = obj[obj.length - 1].text.split(' ');
-        const lastWord = lastLineArray[lastLineArray.length - 1];
-        const self = this;
-        fetch('http://localhost:8080/excerpt', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ query: lastWord }),
-        }).then(response => {
-            response.json().then(data => {
-                this.setState({ editorState }, () => { this.props.onInputChanged(data); });
+        // const lastLineArray = obj[obj.length - 1].text.split(' ');
+        // const lastWord = lastLineArray[lastLineArray.length - 1];
+
+        const lastLine = obj[obj.length - 1].text;
+        if (lastLine === '') {
+            this.setState({ editorState }, () => { this.props.onInputChanged({ score: 0, toString: '', toRef: '', toInsert: '' }); });
+        } else {
+            const self = this;
+            fetch('http://localhost:8080/excerpt', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query: lastLine }),
+            }).then(response => {
+                response.json().then(data => {
+                    this.setState({ editorState }, () => { this.props.onInputChanged(data); });
+                });
+            }).catch(function (ex: Error, ) {
+                self.setState({ editorState });
             });
-        }).catch(function (ex: Error, ) {
-            self.setState({ editorState });
-        });
+        }
+
     }
     render() {
         return (
