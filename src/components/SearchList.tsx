@@ -1,9 +1,8 @@
 
 import * as React from 'react';
-
 interface Props {
-    key: number;
     value: string;
+    onListClicked: ((data: string) => void);
 }
 interface State {
 }
@@ -14,13 +13,16 @@ class SearchList extends React.Component<Props, State> {
         this.state = {
         };
     }
+    handleClick = () => {  // list click hander
+        this.props.onListClicked(this.props.value);
+    }
     render() {
         return (
-            <li key={this.props.key}>
-                <span className="search-list-span">
+            <li >
+                <span className="search-list-span" onClick={((e) => this.handleClick())}>
                     {this.props.value}
                 </span>
-            </li >
+            </li>
         );
     }
 }

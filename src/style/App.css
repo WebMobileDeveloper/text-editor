@@ -1,3 +1,7 @@
+body {
+  font-family: 'CooperHewitt-Medium'; 
+}
+
 /* css from template */
 html, body {
   height: 100%;
@@ -16,31 +20,46 @@ html, body {
   grid-template-rows: min-content auto min-content;
   grid-template-columns: 33% 33% 34%;
 }
+#page > .header, #page > .footer{
+  padding: 1ex 3ex;  
+}
 #page > .header {
   grid-area: header;
   display: flex;
-  background-color: #8ca0ff;
+  background-color: #31436b;
+  font-family: 'charter_regular' !important;
+  color:white;
+}
+#page > .footer {
+  grid-area: footer;
+  background-color: #31436b;
+  text-align: right;
+  font-style: italic;
+  font-family: 'charter_regular' !important;
+  color:white;
 }
 #page > .description {
   grid-area: left;
   display: flex;
-  position: relative;
-}
-#page > .summary {
-  grid-area: center;
-  display: flex;
-  position: relative;
+  position: relative;  
 }
 #page > .search {
+  grid-area: center;
+  display: flex;
+  background-color: #F2EEED;
+  position: relative;
+  overflow: auto;
+  overflow-x: hidden;
+}
+#page > .summary {
   grid-area: right;
   display: flex;
-  background-color: #FDF6E3;
+  position: relative;
+  background-color: white;
+  padding: 0px 20px;
 }
-#page > .footer {
-  grid-area: footer;
-  display: flex;
-  background-color: #f0f0f0;
-}
+
+
 
 
 /*========= editor style ================*/
@@ -51,6 +70,9 @@ html, body {
   display: flex;
   flex-direction: column;
   padding-right: 5px;
+}
+ul{
+  -webkit-padding-start: 20px;
 }
 .react-wysiwyg-typescript-toolbar{  
   visibility: hidden !important;
@@ -70,14 +92,24 @@ html, body {
 }
 .public-DraftStyleDefault-block{
   margin-top: 0 !important;
-  margin-bottom: 0.5em !important;
+  margin-bottom: 0.5em !important;  
 }
-
+.public-DraftEditor-content{
+  width: 100%;
+  position: absolute;
+}
 /* ============== search List style */
-
 .search ul{
   list-style: none;
 }
+#page > .search li{
+  margin-bottom: 20px;
+}
 .search-list-span{
-  background-color: aquamarine;
+  padding: 5px;
+  color: #0c1d9c;
+}
+.search-list-span:hover{
+  color: red;
+  text-decoration-line: underline;
 }

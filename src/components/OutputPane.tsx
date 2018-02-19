@@ -1,29 +1,36 @@
-
 import * as React from 'react';
-import Draft, { htmlToDraft } from 'react-wysiwyg-typescript';
-import { EditorState } from 'draft-js';
-
-
+// import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 interface Props {
     OutputPaneContent: string;
 }
 interface State {
-    editorState: EditorState;
+    outputHTML: string;
 }
 class OutputPane extends React.Component<Props, State> {
+
+    private outputDiv: HTMLDivElement | null;
     constructor(props: Props) {
         super(props);
         this.state = {
-            editorState: htmlToDraft(props.OutputPaneContent), // or use an EmptyState
+            outputHTML: '',
         };
+    }
+    componentDidUpdate(prevProp: Props, prevState: State) {
+        if (this.outputDiv !== null) {
+            this.outputDiv.innerHTML = this.state.outputHTML;
+        }
+    }
+    componentWillReceiveProps(nextProps: Props) {  // when got new list it will be must appended 
+        if (nextProps.OutputPaneContent) {   // if exist the list will append 
+            // append new list
+            let currentHTML = this.state.outputHTML + '<p></p><p style="color:blue;">' + nextProps.OutputPaneContent + '</p>';
+            this.setState({ outputHTML: currentHTML });
+        }
     }
     render() {
         return (
-            <Draft
-                editorState={this.state.editorState}
-                onEditorStateChange={(editorState) => { this.setState({ editorState }); }}
-            />
+            <div contentEditable={true} ref={(ref) => this.outputDiv = ref} />
         );
     }
 }

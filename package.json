@@ -1,16 +1,15 @@
 {
-  "name": "three-editor",
+  "name": "editor",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/react-redux": "^5.0.15",
-    "jquery": "^3.3.1",
+    "draft-js-export-html": "^1.2.0",
+    "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-redux": "^5.0.6",
-    "react-redux-typescript": "^3.0.0-rc.3",
+    "react-html-parser": "^2.0.2",
+    "react-rte": "^0.16.0",
     "react-scripts-ts": "2.13.0",
-    "react-wysiwyg-typescript": "^1.0.1",
-    "redux-thunk": "^2.2.0"
+    "react-wysiwyg-typescript": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -20,11 +19,9 @@
   },
   "devDependencies": {
     "@types/jest": "^22.1.2",
-    "@types/node": "^9.4.5",
-    "@types/react": "^16.0.36",
-    "@types/react-dom": "^16.0.3",
-    "classnames": "^2.2.5",
-    "react": "^16.2.0",
+    "@types/node": "^9.4.6",
+    "@types/react": "^16.0.38",
+    "@types/react-dom": "^16.0.4",
     "typescript": "^2.7.1"
   }
 }
