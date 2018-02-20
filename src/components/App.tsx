@@ -41,7 +41,6 @@ class App extends React.Component<Props, State> {
   render() {
     let searchResults = null;
     if (this.state.searchResults.length === 0) {
-      console.log(searchResults);
       searchResults = <div className={'placeholder-div'}>Relevant law</div>;
     } else {
       searchResults = (
