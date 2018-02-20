@@ -39,29 +39,38 @@ class App extends React.Component<Props, State> {
   }
 
   render() {
+    let searchResults = null;
+    if (this.state.searchResults.length === 0) {
+      console.log(searchResults);
+      searchResults = <div className={'placeholder-div'}>Relevant law</div>;
+    } else {
+      searchResults = (
+        <div>
+          <ul>
+            {
+              this.state.searchResults.map((item: ResponseType, i: number) => {
+                return <SearchList key={i} value={item} onListClicked={this.listClicked} />;
+              })
+            }
+            {
+              this.state.searchResults.map((item: ResponseType, i: number) => {
+                return <SearchList key={i} value={item} onListClicked={this.listClicked} />;
+              })
+            }
+          </ul>
+        </div>
+      );
+    }
     return (
-      <div id="page">
+      <div id="page" >
         <div className="header" >
-          Corrector
+          LeSearch
         </div>
         <div className="description" >
           <InputPane contents={''} onInputChanged={this.inputChanged} />
         </div>
         <div className="search">
-          <div>
-            <ul>
-              {
-                this.state.searchResults.map((item: ResponseType, i: number) => {
-                  return <SearchList key={i} value={item} onListClicked={this.listClicked} />;
-                })
-              }
-              {
-                this.state.searchResults.map((item: ResponseType, i: number) => {
-                  return <SearchList key={i} value={item} onListClicked={this.listClicked} />;
-                })
-              }
-            </ul>
-          </div>
+          {searchResults}
         </div>
         <div className="summary">
           <OutputPane OutputPaneContent={this.state.outputString + this.state.appendString} />

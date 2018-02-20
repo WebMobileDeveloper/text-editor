@@ -59,7 +59,12 @@ html, body {
   padding: 0px 20px;
 }
 
-
+.placeholder-div{
+  padding: 10px;
+  color: #9197a3;
+  position: absolute;
+  z-index: 0;
+}
 
 
 /*========= editor style ================*/
