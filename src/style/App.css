@@ -20,7 +20,7 @@ html, body {
   grid-template-rows: min-content auto min-content;
   grid-template-columns: 33% 33% 34%;
 }
-#page > .header, #page > .footer{
+#page > .header span, #page > .footer{
   padding: 1ex 3ex;  
 }
 #page > .header {
@@ -29,6 +29,20 @@ html, body {
   background-color: #31436b;
   font-family: 'charter_regular' !important;
   color:white;
+}
+
+#page > .header .offlineIcon {
+  margin-top:0.1em;
+  width: 1.8em;
+  height: 1.8em; 
+  position: absolute;
+  right: 20px;
+}
+.online{
+  content: url('../images/online.png');
+}
+.offline{
+  content: url('../images/offline.png');
 }
 #page > .footer {
   grid-area: footer;

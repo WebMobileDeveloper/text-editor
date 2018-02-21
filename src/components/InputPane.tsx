@@ -3,10 +3,10 @@ import * as React from 'react';
 import Draft, { htmlToDraft, draftToRaw } from 'react-wysiwyg-typescript';
 import { EditorState } from 'draft-js';
 import { ResponseType } from '../types';
-
 interface Props {
     contents: string;
     onInputChanged: ((data: ResponseType) => void);
+    offlined: () => void;
 }
 interface State {
     editorState: EditorState;
@@ -24,10 +24,11 @@ class InputPane extends React.Component<Props, State> {
         const obj = JSON.parse(raw).blocks;
         // const lastLineArray = obj[obj.length - 1].text.split(' ');
         // const lastWord = lastLineArray[lastLineArray.length - 1];
-
         const lastLine = obj[obj.length - 1].text;
+
+        this.setState({ editorState });
         if (lastLine === '') {
-            this.setState({ editorState }, () => { this.props.onInputChanged({ score: 0, toString: '', toRef: '', toInsert: '' }); });
+            this.props.onInputChanged({ score: 0, toString: '', toRef: '', toInsert: '' });
         } else {
             const self = this;
             fetch('http://localhost:8080/excerpt', {
@@ -39,10 +40,10 @@ class InputPane extends React.Component<Props, State> {
                 body: JSON.stringify({ query: lastLine }),
             }).then(response => {
                 response.json().then(data => {
-                    this.setState({ editorState }, () => { this.props.onInputChanged(data); });
+                    self.props.onInputChanged(data);
                 });
             }).catch(function (ex: Error, ) {
-                self.setState({ editorState });
+                self.props.offlined();
             });
         }
 

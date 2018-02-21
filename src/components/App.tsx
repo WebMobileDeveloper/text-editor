@@ -10,7 +10,9 @@ interface State {
   outputString: string;
   appendString: string;
   searchResults: Array<ResponseType>;
+  connectionStatus: string;
 }
+
 class App extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -18,9 +20,11 @@ class App extends React.Component<Props, State> {
       outputString: '',
       appendString: '',
       searchResults: [],
+      connectionStatus: 'online',
     };
     this.listClicked = this.listClicked.bind(this);
     this.inputChanged = this.inputChanged.bind(this);
+    this.offlined = this.offlined.bind(this);
   }
 
   listClicked(data: string): void {
@@ -34,10 +38,39 @@ class App extends React.Component<Props, State> {
       //   return item.toLowerCase().includes(tostring.toLowerCase());
       // })
       searchResults: (data.toString === '') ? [] : [data],
+      connectionStatus: 'online',
     });
+    this.checkConnection();
+    return;
+  }
+  offlined(): void {
+    this.setState({ connectionStatus: 'offline' });
     return;
   }
 
+  checkConnection = () => {
+    const self = this;
+    fetch('http://localhost:8080/excerpt', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      if (response.status === 200) {
+        self.setState({ connectionStatus: 'online' });
+      } else {
+        self.setState({ connectionStatus: 'offline' });
+      }
+    }).catch(function (ex: Error, ) {
+      self.setState({ connectionStatus: 'offline' });
+    });
+  }
+
+  componentDidMount() {
+    this.checkConnection();
+    setInterval(this.checkConnection, 60000);
+  }
   render() {
     let searchResults = null;
     if (this.state.searchResults.length === 0) {
@@ -63,10 +96,11 @@ class App extends React.Component<Props, State> {
     return (
       <div id="page" >
         <div className="header" >
-          LeSearch
+          <span>LeSearch</span>
+          <img className={'offlineIcon ' + this.state.connectionStatus} alt={this.state.connectionStatus} title={this.state.connectionStatus}/>          
         </div>
         <div className="description" >
-          <InputPane contents={''} onInputChanged={this.inputChanged} />
+          <InputPane contents={''} onInputChanged={this.inputChanged} offlined={this.offlined} />
         </div>
         <div className="search">
           {searchResults}
