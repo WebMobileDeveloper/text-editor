@@ -2,14 +2,14 @@ import * as React from 'react';
 import InputPane from './InputPane';
 import OutputPane from './OutputPane';
 import SearchList from './SearchList';
-import { ResponseType } from '../types';
+import { Excerpt, ResponseType } from '../types';
 
 interface Props {
 }
 interface State {
   outputString: string;
   appendString: string;
-  searchResults: Array<ResponseType>;
+  searchResults: ResponseType | null;
   connectionStatus: string;
 }
 
@@ -19,7 +19,7 @@ class App extends React.Component<Props, State> {
     this.state = {
       outputString: '',
       appendString: '',
-      searchResults: [],
+      searchResults: null,
       connectionStatus: 'online',
     };
     this.listClicked = this.listClicked.bind(this);
@@ -37,10 +37,9 @@ class App extends React.Component<Props, State> {
       // searchResults: (tostring === '') ? [] : fullResults.filter(function (item: string, i: number) {
       //   return item.toLowerCase().includes(tostring.toLowerCase());
       // })
-      searchResults: (data.toString === '') ? [] : [data],
+      searchResults: (data.paraId === 'Empty') ? null : data,
       connectionStatus: 'online',
     });
-    this.checkConnection();
     return;
   }
   offlined(): void {
@@ -51,7 +50,7 @@ class App extends React.Component<Props, State> {
   checkConnection = () => {
     const self = this;
     fetch('http://localhost:8080/excerpt', {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -73,19 +72,14 @@ class App extends React.Component<Props, State> {
   }
   render() {
     let searchResults = null;
-    if (this.state.searchResults.length === 0) {
+    if (this.state.searchResults === null) {
       searchResults = <div className={'placeholder-div'}>Relevant law</div>;
     } else {
       searchResults = (
         <div>
           <ul>
             {
-              this.state.searchResults.map((item: ResponseType, i: number) => {
-                return <SearchList key={i} value={item} onListClicked={this.listClicked} />;
-              })
-            }
-            {
-              this.state.searchResults.map((item: ResponseType, i: number) => {
+              this.state.searchResults.excerpts.map((item: Excerpt, i: number) => {
                 return <SearchList key={i} value={item} onListClicked={this.listClicked} />;
               })
             }
@@ -97,7 +91,7 @@ class App extends React.Component<Props, State> {
       <div id="page" >
         <div className="header" >
           <span>LeSearch</span>
-          <img className={'offlineIcon ' + this.state.connectionStatus} alt={this.state.connectionStatus} title={this.state.connectionStatus}/>          
+          <img className={'offlineIcon ' + this.state.connectionStatus} alt={this.state.connectionStatus} title={this.state.connectionStatus} />
         </div>
         <div className="description" >
           <InputPane contents={''} onInputChanged={this.inputChanged} offlined={this.offlined} />

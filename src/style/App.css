@@ -131,6 +131,7 @@ ul{
 }
 .search-list-title{
   color: #0c1d9c;
+  cursor: pointer;
 }
 .search-list-title:hover{
   color: red;

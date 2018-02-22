@@ -1,7 +1,10 @@
 export type EMarkup = string;
-export interface ResponseType {
+export interface Excerpt {
     toString: string;
-    score: number;
     toRef: string;
     toInsert: EMarkup;
+}
+export interface ResponseType {
+    paraId: string;
+    excerpts: Array<Excerpt>;
 }

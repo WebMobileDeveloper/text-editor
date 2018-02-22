@@ -1,9 +1,9 @@
 
 import * as React from 'react';
-import { ResponseType } from '../types';
+import { Excerpt } from '../types';
 
 interface Props {
-    value: ResponseType;
+    value: Excerpt;
     onListClicked: ((data: string) => void);
 }
 interface State {
@@ -22,19 +22,16 @@ class SearchList extends React.Component<Props, State> {
         return (
             <li >
                 <div className="search-result">
-                    <div className="search-list-score">
-                       <p>1.</p>   {/* {this.props.value.score} */}
-                    </div>
                     <div className="search-list-body">
                         <p className="search-list-title" onClick={((e) => this.handleClick())}>
-                            {this.props.value.toString}
+                        - {this.props.value.toString}
                         </p>
-                        <p className="search-list-ref" >
+                        {/* <p className="search-list-ref" >
                             {this.props.value.toRef}
                         </p>
                         <p className="search-list-markup">
                             {this.props.value.toInsert}
-                        </p>
+                        </p> */}
                     </div>
                 </div>
             </li>
