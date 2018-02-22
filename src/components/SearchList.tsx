@@ -16,7 +16,7 @@ class SearchList extends React.Component<Props, State> {
         };
     }
     handleClick = () => {  // list click hander
-        this.props.onListClicked(this.props.value.toString);
+        this.props.onListClicked(this.props.value.toInsert);
     }
     render() {
         return (
