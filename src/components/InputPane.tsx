@@ -3,6 +3,8 @@ import * as React from 'react';
 import Draft, { htmlToDraft, draftToRaw } from 'react-wysiwyg-typescript';
 import { EditorState } from 'draft-js';
 import { ResponseType } from '../types';
+import { apiURL } from '../globals';
+
 interface Props {
     contents: string;
     onInputChanged: ((data: ResponseType) => void);
@@ -41,7 +43,7 @@ class InputPane extends React.Component<Props, State> {
                 paraId: 'paraId' + self.state.paraId,
                 paraContent: lastLine
             };
-            fetch('http://localhost:8080/excerpt', {
+            fetch(apiURL, {
                 method: 'POST',
                 mode: 'cors',
                 headers: {
@@ -50,9 +52,7 @@ class InputPane extends React.Component<Props, State> {
                 },
                 body: JSON.stringify(query),
             }).then(response => {
-                console.log(response);
                 response.json().then(data => {
-                    console.log(data);
                     self.props.onInputChanged(data);
                 });
             }).catch(function (ex: Error, ) {

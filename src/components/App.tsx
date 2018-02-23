@@ -3,12 +3,13 @@ import InputPane from './InputPane';
 import OutputPane from './OutputPane';
 import SearchList from './SearchList';
 import { Excerpt, ResponseType } from '../types';
+import { apiURL } from '../globals';
 
 interface Props {
 }
 interface State {
-  outputString: string;
-  appendString: string;
+  appendTitle: string;
+  appendFillIn: string;
   searchResults: ResponseType | null;
   connectionStatus: string;
 }
@@ -17,8 +18,8 @@ class App extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      outputString: '',
-      appendString: '',
+      appendTitle: '',
+      appendFillIn: '',
       searchResults: null,
       connectionStatus: 'online',
     };
@@ -27,8 +28,8 @@ class App extends React.Component<Props, State> {
     this.offlined = this.offlined.bind(this);
   }
 
-  listClicked(data: string): void {
-    this.setState({ appendString: data }, () => { this.setState({ appendString: '' }); });
+  listClicked(title: string, fillIn: string): void {
+    this.setState({ appendTitle: title, appendFillIn: fillIn, }, () => { this.setState({ appendTitle: '', appendFillIn: '', }); });
     return;
   }
 
@@ -49,7 +50,7 @@ class App extends React.Component<Props, State> {
 
   checkConnection = () => {
     const self = this;
-    fetch('http://localhost:8080/excerpt', {
+    fetch(apiURL, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -76,22 +77,16 @@ class App extends React.Component<Props, State> {
       searchResults = <div className={'placeholder-div'}>Relevant law</div>;
     } else {
       searchResults = (
-        <div>
-          <ul>
-            {
-              this.state.searchResults.excerpts.map((item: Excerpt, i: number) => {
-                return <SearchList key={i} value={item} onListClicked={this.listClicked} />;
-              })
-            }
-          </ul>
-        </div>
+        this.state.searchResults.excerpts.map((item: Excerpt, i: number) => {
+          return <SearchList key={i} value={item} onListClicked={this.listClicked} />;
+        })
       );
     }
     return (
       <div id="page" >
         <div className="header" >
           <span>LeSearch</span>
-          <img className={'offlineIcon ' + this.state.connectionStatus} alt={this.state.connectionStatus} title={this.state.connectionStatus} />
+          <img className={'offlineIcon ' + this.state.connectionStatus} alt={this.state.connectionStatus} title={this.state.connectionStatus + '\n' + apiURL} />
         </div>
         <div className="description" >
           <InputPane contents={''} onInputChanged={this.inputChanged} offlined={this.offlined} />
@@ -100,7 +95,7 @@ class App extends React.Component<Props, State> {
           {searchResults}
         </div>
         <div className="summary">
-          <OutputPane OutputPaneContent={this.state.outputString + this.state.appendString} />
+          <OutputPane appendTitle={this.state.appendTitle} appendFillIn={this.state.appendFillIn} />
         </div>
         <div className="footer">
           Copyright '2018 Migamake

@@ -59,11 +59,11 @@ html, body {
 }
 #page > .search {
   grid-area: center;
-  display: flex;
+  /* display: flex; */
   background-color: #F2EEED;
   position: relative;
-  overflow: auto;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 #page > .summary {
   grid-area: right;
@@ -71,6 +71,7 @@ html, body {
   position: relative;
   background-color: white;
   padding: 0px 20px;
+  overflow-y: auto;
 }
 
 .placeholder-div{
@@ -118,13 +119,15 @@ ul{
   position: absolute;
 }
 /* ============== search List style */
-.search ul{
+/* .search ul{
   list-style: none;
   -webkit-margin-before: 0px;
+} */
+.search-result{
+  width: 100%;
 }
 .search-result>div{
-  padding: 5px;
-  float:left;
+  padding: 5px 20px;
 }
 .search-list-score{
   padding-right: 20px;
@@ -136,4 +139,15 @@ ul{
 .search-list-title:hover{
   color: red;
   text-decoration-line: underline;
+}
+[contentEditable=true]:empty:not(:focus):before{
+  content:attr(data-text);
+  color: #0000004a;
+}
+.fill-in-fragment{
+  /* width: calc(33% - 40px);
+   */
+   width: 100%;
+  /* position: absolute;
+  float: left; */
 }

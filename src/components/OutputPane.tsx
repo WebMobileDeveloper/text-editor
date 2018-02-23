@@ -2,7 +2,8 @@ import * as React from 'react';
 // import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 interface Props {
-    OutputPaneContent: string;
+    appendTitle: string;
+    appendFillIn: string;
 }
 interface State {
     outputHTML: string;
@@ -18,19 +19,22 @@ class OutputPane extends React.Component<Props, State> {
     }
     componentDidUpdate(prevProp: Props, prevState: State) {
         if (this.outputDiv !== null) {
-            if (this.state.outputHTML !== '') {                
+            if (this.state.outputHTML !== '') {
                 this.outputDiv.innerHTML = this.state.outputHTML;
             }
         }
     }
     componentWillReceiveProps(nextProps: Props) {  // when got new list it will be must appended         
-        if (nextProps.OutputPaneContent !== '') {   // if exist the list will append             
+        if (nextProps.appendTitle !== '') {   // if exist the list will append             
             // append new list
-            let currentHTML = this.state.outputHTML + '<p></p><p style="color:blue;">' + nextProps.OutputPaneContent + '</p>';
+            let currentHTML = this.state.outputHTML + '<p></p><p style="color:blue;">' + nextProps.appendTitle + '</p>';
+            if (nextProps.appendFillIn !== '') {
+                currentHTML += '<div>' + nextProps.appendFillIn + '</div>';
+            }
             this.setState({ outputHTML: currentHTML });
         }
     }
-    render() {        
+    render() {
         let placeHolder = <div className={'placeholder-div'}>Arguments accepted</div>;
         if (this.state.outputHTML !== '') {
             placeHolder = <div>{this.state.outputHTML}</div>;
