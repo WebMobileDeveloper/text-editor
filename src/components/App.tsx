@@ -34,13 +34,20 @@ class App extends React.Component<Props, State> {
   }
 
   inputChanged(data: ResponseType): void {
-    this.setState({
-      // searchResults: (tostring === '') ? [] : fullResults.filter(function (item: string, i: number) {
-      //   return item.toLowerCase().includes(tostring.toLowerCase());
-      // })
-      searchResults: (data.paraId === 'Empty') ? null : data,
-      connectionStatus: 'online',
-    });
+    if (data.paraId === 'Empty') {
+      this.setState({
+        searchResults: null,
+      });
+    } else {
+      this.setState({
+        // searchResults: (tostring === '') ? [] : fullResults.filter(function (item: string, i: number) {
+        //   return item.toLowerCase().includes(tostring.toLowerCase());
+        // })
+        searchResults: data,
+        connectionStatus: 'online',
+      });
+    }
+
     return;
   }
   offlined(): void {
