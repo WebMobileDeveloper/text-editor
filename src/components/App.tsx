@@ -40,9 +40,6 @@ class App extends React.Component<Props, State> {
       });
     } else {
       this.setState({
-        // searchResults: (tostring === '') ? [] : fullResults.filter(function (item: string, i: number) {
-        //   return item.toLowerCase().includes(tostring.toLowerCase());
-        // })
         searchResults: data,
         connectionStatus: 'online',
       });
@@ -85,7 +82,7 @@ class App extends React.Component<Props, State> {
     } else {
       searchResults = (
         this.state.searchResults.excerpts.map((item: Excerpt, i: number) => {
-          return <SearchList key={i} value={item} onListClicked={this.listClicked} />;
+          return <SearchList key={i} value={item} onListClicked={this.listClicked} keyNum={i}/>;
         })
       );
     }
