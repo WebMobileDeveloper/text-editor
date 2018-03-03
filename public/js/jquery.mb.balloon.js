@@ -153,7 +153,7 @@
 			}
 
 			//$("body").addClass("mbBalloonBlur");
-//			$self.addClass("mbBalloonOpened");
+			//$self.addClass("mbBalloonOpened");
 
 			if (typeof event == "undefined")
 				self.opt.oncursor = false;
@@ -209,10 +209,13 @@
 				});
 
 			} else if (typeof self.opt.balloon == "string" && self.opt.balloon.indexOf("{element}") > -1) {
-
+				// console.log("element");
 				// is the ID of a DOM element
-				var el = self.opt.balloon.replace("{element}", "");
+				var el = self.opt.balloon.replace("{element}", "");		
 				content = $(el).html();
+				// console.log("origin",content);
+				content=content.replace('checked-value="true"','checked-value="true" checked');
+				// console.log("after",content);
 				self.$balloonContainer.append(content);
 				if(self.opt.storeData)
 					$self.data("balloon", content);

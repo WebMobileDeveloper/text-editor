@@ -5,6 +5,7 @@
   "dependencies": {
     "jquery": "^3.3.1",
     "react": "^16.2.0",
+    "react-balloon": "^0.2.5",
     "react-dom": "^16.2.0",
     "react-scripts-ts": "2.13.0",
     "react-wysiwyg-typescript": "^1.0.1"

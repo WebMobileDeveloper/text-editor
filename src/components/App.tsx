@@ -1,8 +1,10 @@
 import * as React from 'react';
 import InputPane from './InputPane';
 import OutputPane from './OutputPane';
-import SearchList from './SearchList';
-import { Excerpt, ResponseType } from '../types';
+import ExcerptNode from './SearchList/ExcerptNode';
+// import CategoryNode from './SearchList/CategoryNode';
+import QuestionNode from './SearchList/QuestionNode';
+import * as Types from '../types';
 import { apiURL } from '../globals';
 
 interface Props {
@@ -10,8 +12,9 @@ interface Props {
 interface State {
   appendTitle: string;
   appendFillIn: string;
-  searchResults: ResponseType | null;
+  apiResults: Types.ResponseType | null;
   connectionStatus: string;
+  paraId: Types.ParaId;
 }
 
 class App extends React.Component<Props, State> {
@@ -20,8 +23,9 @@ class App extends React.Component<Props, State> {
     this.state = {
       appendTitle: '',
       appendFillIn: '',
-      searchResults: null,
+      apiResults: null,
       connectionStatus: 'online',
+      paraId: '',
     };
     this.listClicked = this.listClicked.bind(this);
     this.inputChanged = this.inputChanged.bind(this);
@@ -33,14 +37,16 @@ class App extends React.Component<Props, State> {
     return;
   }
 
-  inputChanged(data: ResponseType): void {
+  inputChanged(data: Types.ResponseType): void {
     if (data.paraId === 'Empty') {
       this.setState({
-        searchResults: null,
+        apiResults: null,
+        paraId: '',
       });
     } else {
       this.setState({
-        searchResults: data,
+        paraId: data.paraId,
+        apiResults: data,
         connectionStatus: 'online',
       });
     }
@@ -77,15 +83,28 @@ class App extends React.Component<Props, State> {
   }
   render() {
     let searchResults = null;
-    if (this.state.searchResults === null) {
+    if (this.state.apiResults === null) {
       searchResults = <div className={'placeholder-div'}>Relevant law</div>;
     } else {
       searchResults = (
-        this.state.searchResults.excerpts.map((item: Excerpt, i: number) => {
-          return <SearchList key={i} value={item} onListClicked={this.listClicked} keyNum={i}/>;
+        this.state.apiResults.excerpts.map((item: Types.Feedback, i: number) => {
+          switch (item.ftype) {
+            case Types.FeedbackType.excerpt:
+              return <ExcerptNode key={i} value={item as Types.Excerpt} onListClicked={this.listClicked} keyNum={i} />;
+            case Types.FeedbackType.question:
+              return (
+                <QuestionNode key={i} value={item as Types.Question} keyNum={i} onQuestionSelected={this.inputChanged} offlined={this.offlined} paraId={this.state.paraId} />
+              );
+            // case FeedbackType.excerpt:
+            //   return <ExcerptNode key={i} value={item as Excerpt} onListClicked={this.listClicked} keyNum={i} />;
+            default:
+              return null;
+          }
+
         })
       );
     }
+
     return (
       <div id="page" >
         <div className="header" >
